@@ -2,6 +2,7 @@ package models
 
 import (
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	"go-admin/conf/settings"
 	"log"
