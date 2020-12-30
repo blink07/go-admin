@@ -2,9 +2,9 @@ package models
 
 import (
 	"fmt"
+	"github.com/jinzhu/gorm"
 	"go-admin/conf/settings"
 	"log"
-	"github.com/jinzhu/gorm"
 	"time"
 )
 

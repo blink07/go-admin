@@ -53,13 +53,13 @@ package log
 
 
 import (
-	"github.com/gin-gonic/gin"
-	"os"
 	"fmt"
-	"github.com/sirupsen/logrus"
+	"github.com/gin-gonic/gin"
 	"github.com/lestrrat/go-file-rotatelogs"
-	"time"
 	"github.com/rifflock/lfshook"
+	"github.com/sirupsen/logrus"
+	"os"
+	"time"
 )
 
 func Logger() gin.HandlerFunc {
