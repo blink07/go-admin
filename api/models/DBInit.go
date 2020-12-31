@@ -111,3 +111,11 @@ func addExTraSpaceIfExist(str string) string{
 	}
 	return ""
 }
+
+// model 公共字段
+type Model struct {
+	ID int `gorm:"primary_key" json:"id"`
+	CreatedOn int `json:"created_on"`
+	ModifiedOn int `json:"modified_on"`
+	DeletedOn int `json:"deleted_on"`
+}

@@ -13,3 +13,5 @@
 {"level":"info","msg":"| 200 |            0s |       127.0.0.1 | GET  /api/v1/ping |","time":"2020-12-31T11:52:55+08:00"}
 {"level":"info","msg":"[BBBBBBBBBBBBBBB]","time":"2020-12-31T14:55:52+08:00"}
 {"level":"info","msg":"| 200 |      1.9927ms |       127.0.0.1 | GET  /api/v1/ping |","time":"2020-12-31T14:55:52+08:00"}
+{"level":"info","msg":"[BBBBBBBBBBBBBBB]","time":"2020-12-31T15:42:53+08:00"}
+{"level":"info","msg":"| 200 |      2.0138ms |       127.0.0.1 | GET  /api/v1/ping |","time":"2020-12-31T15:42:53+08:00"}
