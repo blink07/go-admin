@@ -17,6 +17,8 @@ type Server struct {
 	HttpPort int
 	ReadTimeout time.Duration
 	WriteTimeout time.Duration
+	LogDir string
+	LogFile string
 }
 
 var ServerSetting = &Server{}

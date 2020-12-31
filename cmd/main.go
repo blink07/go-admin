@@ -2,15 +2,14 @@ package main
 
 import (
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"go-admin/api/routers"
-	"syscall"
-
+	"net/http"
 	//"github.com/gin-gonic/gin"
 	//"go-admin/api/middlewares/log"
 	"go-admin/api/models"
 	"go-admin/conf/settings"
 	l "log"
-	"github.com/fvbock/endless"
 )
 
 var logger *l.Logger
@@ -27,21 +26,32 @@ func main() {
 	//	})
 	//})
 	//r.Run()
-
-	endless.DefaultReadTimeOut = settings.ServerSetting.ReadTimeout
-	endless.DefaultWriteTimeOut = settings.ServerSetting.WriteTimeout
-	endless.DefaultMaxHeaderBytes = 1 << 20
-	endPoint := fmt.Sprintf(":%d", settings.ServerSetting.HttpPort)
-
-	server := endless.NewServer(endPoint, routers.InitRouter())
-
-	server.BeforeBegin = func(add string) {
-		logger.Printf("Actual pid is %d", syscall.Getpid())
-
+	// windows下endless不兼容
+	//endless.DefaultReadTimeOut = settings.ServerSetting.ReadTimeout
+	//endless.DefaultWriteTimeOut = settings.ServerSetting.WriteTimeout
+	//endless.DefaultMaxHeaderBytes = 1 << 20
+	//endPoint := fmt.Sprintf(":%d", settings.ServerSetting.HttpPort)
+	//
+	//server := endless.NewServer(endPoint, routers.InitRouter())
+	//
+	//server.BeforeBegin = func(add string) {
+	//	logger.Printf("Actual pid is %d", syscall.Getpid())
+	//
+	//}
+	//err := server.ListenAndServe()
+	//if err != nil {
+	//	logger.Printf("Server err: %v", err)
+	//}
+	gin.SetMode(settings.ServerSetting.RunMode)
+	routersInit := routers.InitRouter()
+	readTimeout := settings.ServerSetting.ReadTimeout
+	writeTimeout := settings.ServerSetting.WriteTimeout
+	endPort := fmt.Sprintf(":%d", settings.ServerSetting.HttpPort)
+	server := &http.Server{
+		Addr: endPort,
+		Handler: routersInit,
+		ReadTimeout: readTimeout,
+		WriteTimeout: writeTimeout,
 	}
-
-	err := server.ListenAndServe()
-	if err != nil {
-		logger.Printf("Server err: %v", err)
-	}
+	server.ListenAndServe()
 }
