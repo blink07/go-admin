@@ -9,10 +9,9 @@ import (
 	//"go-admin/api/middlewares/log"
 	"go-admin/api/models"
 	"go-admin/conf/settings"
-	l "log"
 )
 
-var logger *l.Logger
+//var logger *l.Logger
 func main() {
 	settings.Setup()
 	models.SetUp()
