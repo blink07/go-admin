@@ -11,7 +11,7 @@ import (
 	"go-admin/conf/settings"
 )
 
-//var logger *l.Logger
+
 func main() {
 	settings.Setup()
 	models.SetUp()
