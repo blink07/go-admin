@@ -1,6 +1,9 @@
 package models
 
-import "go-admin/api/middlewares/log"
+import (
+	"github.com/jinzhu/gorm"
+	"go-admin/api/middlewares/log"
+)
 
 type Role struct {
 	Model
@@ -14,7 +17,7 @@ func AddRole(role map[string]interface{}) error {
 
 	err := db.Create(&Role{
 		RoleName: role["role_name"].(string),
-		Description: role["role_desciption"].(string),
+		Description: role["description"].(string),
 	}).Error
 
 	if err!= nil {
@@ -23,4 +26,15 @@ func AddRole(role map[string]interface{}) error {
 	}
 
 	return nil
+}
+
+
+// 获取角色信息
+func RoleInfo(id int) (*Role, error) {
+	var role Role
+	err := db.Where("id = ? AND deleted_on = ? ", id, 0).First(&role).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	return &role, nil
 }

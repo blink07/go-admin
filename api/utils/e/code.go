@@ -8,4 +8,8 @@ const (
 
 
 	// 详细错误码
+
+	// Role
+	DATA_INSERT_INOT_FAIL = 100001
+
 )
