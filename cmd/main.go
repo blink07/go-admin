@@ -11,6 +11,7 @@ import (
 	"go-admin/conf/settings"
 )
 
+
 func main() {
 	settings.Setup()
 	models.SetUp()
