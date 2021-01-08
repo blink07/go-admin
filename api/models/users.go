@@ -1,6 +1,9 @@
 package models
 
-import "go-admin/api/middlewares/log"
+import (
+	"github.com/pkg/errors"
+	"go-admin/api/middlewares/log"
+)
 
 type User struct {
 	Model
@@ -18,6 +21,12 @@ type User struct {
 
 
 func AddUser(user map[string]interface{}) error {
+	var u User
+	record := db.Where("username=?", user["username"]).First(&u).RecordNotFound()
+
+	if !record {
+		return errors.New("用户名已经存在~")
+	}
 
 	err := db.Create(&User{
 		Username: user["username"].(string),
@@ -32,6 +41,16 @@ func AddUser(user map[string]interface{}) error {
 	if err != nil {
 		log.Info("Create User err:%v", err)
 		return err
+	}
+	return nil
+}
+
+
+func Login(username string, password string) error {
+	var u User
+	record := db.Where("username=? AND password=?", username, password).First(&u).RecordNotFound()
+	if !record {
+		return errors.New("用户名或密码错误~")
 	}
 	return nil
 }

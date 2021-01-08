@@ -1,0 +1,37 @@
+{"level":"info","msg":"| 200 |            0s |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T11:39:08+08:00"}
+{"level":"info","msg":"| 200 |            0s |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T11:40:29+08:00"}
+{"level":"info","msg":"[username 用户名不能为空]","time":"2021-01-08T11:43:16+08:00"}
+{"level":"info","msg":"| 200 |      4.9869ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T11:43:16+08:00"}
+{"level":"info","msg":"[role_id  Can not be empty]","time":"2021-01-08T11:43:39+08:00"}
+{"level":"info","msg":"| 200 |       997.5µs |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T11:43:39+08:00"}
+{"level":"info","msg":"[role_id 角色ID不能为空]","time":"2021-01-08T11:44:53+08:00"}
+{"level":"info","msg":"| 200 |      1.9938ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T11:44:53+08:00"}
+{"level":"info","msg":"[role_id 角色ID不能为空]","time":"2021-01-08T11:45:06+08:00"}
+{"level":"info","msg":"| 200 |            0s |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T11:45:06+08:00"}
+{"level":"info","msg":"[role_id 角色ID不能为空]","time":"2021-01-08T11:45:44+08:00"}
+{"level":"info","msg":"| 200 |            0s |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T11:45:44+08:00"}
+{"level":"info","msg":"[role_id 角色ID不能为空]","time":"2021-01-08T11:46:08+08:00"}
+{"level":"info","msg":"| 200 |      1.9953ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T11:46:08+08:00"}
+{"level":"info","msg":"[role_id 角色ID不能为空]","time":"2021-01-08T11:46:09+08:00"}
+{"level":"info","msg":"| 200 |            0s |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T11:46:09+08:00"}
+{"level":"info","msg":"| 200 |       996.8µs |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T11:46:36+08:00"}
+{"level":"info","msg":"| 200 |            0s |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T14:58:26+08:00"}
+{"level":"info","msg":"| 500 |      2.9917ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T15:05:54+08:00"}
+{"level":"info","msg":"| 500 |      2.9895ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T15:10:43+08:00"}
+{"level":"info","msg":"[Create User err:%v Error 1406: Data too long for column 'password' at row 1]","time":"2021-01-08T15:17:00+08:00"}
+{"level":"info","msg":"| 200 |     70.8121ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T15:17:00+08:00"}
+{"level":"info","msg":"| 200 |      5.9829ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T15:17:44+08:00"}
+{"level":"info","msg":"[Create User err:%v Error 1406: Data too long for column 'password' at row 1]","time":"2021-01-08T15:19:11+08:00"}
+{"level":"info","msg":"| 200 |      1.9978ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T15:19:11+08:00"}
+{"level":"info","msg":"[Create User err:%v Error 1406: Data too long for column 'password' at row 1]","time":"2021-01-08T15:19:50+08:00"}
+{"level":"info","msg":"| 200 |      3.9907ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T15:19:50+08:00"}
+{"level":"info","msg":"[Create User err:%v Error 1406: Data too long for column 'password' at row 1]","time":"2021-01-08T15:19:51+08:00"}
+{"level":"info","msg":"| 200 |      2.9933ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T15:19:51+08:00"}
+{"level":"info","msg":"[Create User err:%v Error 1406: Data too long for column 'password' at row 1]","time":"2021-01-08T15:20:04+08:00"}
+{"level":"info","msg":"| 200 |       7.973ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T15:20:04+08:00"}
+{"level":"info","msg":"[Create User err:%v Error 1406: Data too long for column 'password' at row 1]","time":"2021-01-08T15:21:19+08:00"}
+{"level":"info","msg":"| 200 |      3.9899ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T15:21:19+08:00"}
+{"level":"info","msg":"| 200 |      4.9869ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T15:22:12+08:00"}
+{"level":"info","msg":"| 200 |      6.9814ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T15:22:45+08:00"}
+{"level":"info","msg":"| 200 |      3.9896ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T15:31:19+08:00"}
+{"level":"info","msg":"| 200 |      5.9857ms |             ::1 | POST  /api/v1/user/register |","time":"2021-01-08T15:33:58+08:00"}

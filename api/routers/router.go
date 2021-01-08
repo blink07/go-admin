@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-admin/api/middlewares/log"
 	"go-admin/api/routers/api/v1/role"
+	"go-admin/api/routers/api/v1/user"
 )
 //var logru = logrus.New()
 
@@ -28,7 +29,7 @@ func InitRouter() *gin.Engine {
 	apiv1.POST("/role", role.AddRole)
 
 	// 用户模块
-	apiv1.POST("/user/register",)
+	apiv1.POST("/user/register", user.Register)
 
 	return r
 }
