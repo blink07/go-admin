@@ -19,6 +19,8 @@ type Server struct {
 	WriteTimeout time.Duration
 	LogDir string
 	LogFile string
+
+	SigningKey string
 }
 
 var ServerSetting = &Server{}
