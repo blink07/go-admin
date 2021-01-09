@@ -1,0 +1,6 @@
+{"level":"info","msg":"| 200 |       5.994ms |       127.0.0.1 | POST  /api/v1/role |","time":"2021-01-09T12:21:39+08:00"}
+{"level":"info","msg":"| 404 |            0s |       127.0.0.1 | POST  /api/v1/user |","time":"2021-01-09T12:22:43+08:00"}
+{"level":"info","msg":"| 404 |            0s |       127.0.0.1 | POST  /api/v1/register |","time":"2021-01-09T12:22:55+08:00"}
+{"level":"info","msg":"[username 用户名长度不能小于6位]","time":"2021-01-09T12:23:18+08:00"}
+{"level":"info","msg":"| 200 |            0s |       127.0.0.1 | POST  /api/v1/user/register |","time":"2021-01-09T12:23:18+08:00"}
+{"level":"info","msg":"| 200 |      5.9845ms |       127.0.0.1 | POST  /api/v1/user/register |","time":"2021-01-09T12:23:25+08:00"}
