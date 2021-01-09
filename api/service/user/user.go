@@ -1,8 +1,11 @@
 package user
 
 import (
+	"github.com/dgrijalva/jwt-go"
+	"go-admin/api/middlewares/JWT"
 	"go-admin/api/models"
 	h "go-admin/api/utils/hash"
+	"time"
 )
 
 type UserService struct {
@@ -46,10 +49,34 @@ func (user *UserService)UserRegister() error {
 func (user *UserService) Login(username string, password string) (map[string]interface{}, error) {
 
 	bytes := h.Encryption([]byte(password))
-	err := models.Login(username, password)
+	err := models.Login(username, bytes)
 	if err != nil {
 		return nil, err
 	}
+	// TODO RoleId 还未拿到
+	token, err := tokenNext(user.RoleId, user.Username)
+	if err != nil {
+		return nil, err
+	}
+	return map[string]interface{}{"token":token}, nil
+}
 
-	return nil, nil
+// 登录以后签发jwt
+func tokenNext(roleId int, username string) (string, error)  {
+	key := JWT.NewJWT()
+	claims := JWT.CustomClaims{
+		Username: username,
+		RoleId: roleId,
+		StandardClaims:jwt.StandardClaims{
+			NotBefore: int64(time.Now().Unix()-1000),
+			ExpiresAt: int64(time.Now().Unix() + 60 * 60 * 24 * 7),
+			Issuer: "blink07",
+		},
+	}
+	token, err := key.CreateToken(claims)
+	// TODO 还未将token保存
+	if err != nil{
+		return "", err
+	}
+	return token, nil
 }
