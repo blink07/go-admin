@@ -2,8 +2,12 @@ package JWT
 
 import (
 	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
+	"go-admin/api/utils/app"
+	"go-admin/api/utils/e"
 	"go-admin/conf/settings"
+	"net/http"
 	"time"
 )
 
@@ -86,3 +90,22 @@ func (j JWT)RefreshToken(tokenString string) (string, error)  {
 	return "", TokenInvalid
 }
 
+func JWTAuth() gin.HandlerFunc {
+	return func(context *gin.Context) {
+		appG := app.Gin{context}
+		token := context.Request.Header.Get("token")
+		println(token)
+		j := NewJWT()
+		claims,err := j.ParseToken(token)
+		if err != nil {
+			if err == TokenExpired {
+				appG.Response(http.StatusOK, e.TOKEN_NOT_VALID, nil)
+				return
+			}
+			appG.Response(http.StatusOK, e.TOKEN_NOT_VALID, nil)
+			context.Abort()
+		}
+		context.Set("claims",claims)
+		context.Next()
+	}
+}

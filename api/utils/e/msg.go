@@ -7,6 +7,8 @@ var MsgFlags = map[int]string{
 
 
 	DATA_INSERT_INOT_FAIL:"数据插入失败",
+	USERNAME_OR_PASSWORD:"用户名或密码错误",
+	TOKEN_NOT_VALID: "token无效",
 }
 
 

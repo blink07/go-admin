@@ -46,11 +46,12 @@ func AddUser(user map[string]interface{}) error {
 }
 
 
-func Login(username string, password string) error {
+func Login(username string, password string) (role_id int, err error) {
 	var u User
 	record := db.Where("username=? AND password=?", username, password).First(&u).RecordNotFound()
-	if !record {
-		return errors.New("用户名或密码错误~")
+
+	if record {
+		return 0, errors.New("用户名或密码错误~")
 	}
-	return nil
+	return u.RoleID, nil
 }

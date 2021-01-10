@@ -2,6 +2,7 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-admin/api/middlewares/JWT"
 	"go-admin/api/middlewares/log"
 	"go-admin/api/routers/api/v1/role"
 	"go-admin/api/routers/api/v1/user"
@@ -19,6 +20,12 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Recovery())
 
 	apiv1 := r.Group("/api/v1")
+
+	// 用户模块
+	apiv1.POST("/user/register", user.Register)
+	apiv1.POST("/user/login", user.Login)
+
+	apiv1.Use(JWT.JWTAuth())
 	apiv1.GET("/ping", func(context *gin.Context) {
 		log.Info("BBBBBBBBBBBBBBB")
 		context.JSON(200, gin.H{
@@ -28,8 +35,7 @@ func InitRouter() *gin.Engine {
 	apiv1.GET("/role:id", role.RoleInfo)
 	apiv1.POST("/role", role.AddRole)
 
-	// 用户模块
-	apiv1.POST("/user/register", user.Register)
+
 
 	return r
 }

@@ -46,15 +46,15 @@ func (user *UserService)UserRegister() error {
 	return nil
 }
 
-func (user *UserService) Login(username string, password string) (map[string]interface{}, error) {
+func (user *UserService) Login() (map[string]interface{}, error) {
 
-	bytes := h.Encryption([]byte(password))
-	err := models.Login(username, bytes)
+	bytes := h.Encryption([]byte(user.Password))
+	roleId, err := models.Login(user.Username, bytes)
 	if err != nil {
 		return nil, err
 	}
 	// TODO RoleId 还未拿到
-	token, err := tokenNext(user.RoleId, user.Username)
+	token, err := tokenNext(roleId, user.Username)
 	if err != nil {
 		return nil, err
 	}

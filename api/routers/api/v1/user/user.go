@@ -57,3 +57,30 @@ func Register(c *gin.Context) {
 	appG.Response(http.StatusOK, e.SUCCESS, "注册成功~")
 	return
 }
+
+// 用户登录
+func Login(c *gin.Context)  {
+	appG := app.Gin{c}
+	var userForm UserForm
+	err := c.Bind(&userForm)
+	if err != nil {
+		appG.Response(http.StatusOK, e.INVALID_PARAMS, "参数传入错误")
+		return
+	}
+	valid := validation.Validation{}
+	valid.Required(userForm.Username, "username").Message("请输入密码")
+	valid.MinSize(userForm.Username, 6, "username").Message("用户名输入错误")
+	valid.MaxSize(userForm.Username, 20, "username").Message("用户名输入错误")
+	valid.Required(userForm.Password, "password").Message("请输入密码")
+	valid.MinSize(userForm.Password, 6, "password").Message("密码输入错误")
+	valid.MaxSize(userForm.Password, 20, "password").Message("密码输入错误")
+
+	user := user.UserService{Username: userForm.Username, Password: userForm.Password}
+	data, err := user.Login()
+	if err != nil {
+		appG.Response(http.StatusOK, e.USERNAME_OR_PASSWORD, err.Error())
+		return
+	}
+
+	appG.Response(http.StatusOK, e.SUCCESS, data)
+}
