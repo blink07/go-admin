@@ -55,3 +55,21 @@ func Login(username string, password string) (role_id int, err error) {
 	}
 	return u.RoleID, nil
 }
+
+func UserInfo(id int) (*User, error) {
+	var u User
+	err := db.Where("id=?", id).First(&u).Error
+
+	if err != nil{
+		return nil, err
+	}
+
+	var r Role
+	err = db.Where("id=?", u.RoleID).First(&r).Error
+	if err!= nil {
+		return nil,err
+	}
+	u.Role = r
+
+	return &u, nil
+}

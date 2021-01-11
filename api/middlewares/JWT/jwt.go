@@ -93,6 +93,8 @@ func (j JWT)RefreshToken(tokenString string) (string, error)  {
 func JWTAuth() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		appG := app.Gin{context}
+		path := context.Request.RequestURI
+		println(">>>>>>",path)
 		token := context.Request.Header.Get("token")
 		println(token)
 		j := NewJWT()

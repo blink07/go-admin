@@ -21,21 +21,25 @@ func InitRouter() *gin.Engine {
 
 	apiv1 := r.Group("/api/v1")
 
-	// 用户模块
+	// 用户模块注册和登录，不认证
 	apiv1.POST("/user/register", user.Register)
 	apiv1.POST("/user/login", user.Login)
 
+	// 定义认证中间件
 	apiv1.Use(JWT.JWTAuth())
+
 	apiv1.GET("/ping", func(context *gin.Context) {
 		log.Info("BBBBBBBBBBBBBBB")
 		context.JSON(200, gin.H{
 			"message":"pong",
 		})
 	})
-	apiv1.GET("/role:id", role.RoleInfo)
+	// 角色模块
 	apiv1.POST("/role", role.AddRole)
+	apiv1.GET("/role/:id", role.RoleInfo)
 
-
+	// 用户模块
+	apiv1.GET("/user/:id", user.UserInfo)
 
 	return r
 }

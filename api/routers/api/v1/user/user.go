@@ -3,6 +3,7 @@ package user
 import (
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
+	"github.com/unknwon/com"
 	"go-admin/api/service/user"
 	"go-admin/api/utils/app"
 	"go-admin/api/utils/e"
@@ -83,4 +84,30 @@ func Login(c *gin.Context)  {
 	}
 
 	appG.Response(http.StatusOK, e.SUCCESS, data)
+}
+
+func UserInfo(c *gin.Context) {
+	appG := app.Gin{c}
+
+	id := com.StrTo(c.Param("id")).MustInt()
+
+	valid := validation.Validation{}
+	valid.Required(id, "id")
+	valid.Min(id, 1, "id").Message("用户ID必须大于1")
+	if valid.HasErrors() {
+		//println(valid.Errors)
+		appG.Response(http.StatusOK, e.INVALID_PARAMS, "参数传入错误")
+		return
+	}
+
+	userService := user.UserService{Id:id}
+	userInfo,err := userService.UserInfo()
+	if err!=nil {
+		appG.Response(http.StatusOK, e.ERROR, err.Error())
+		return
+	}
+
+	appG.Response(http.StatusOK, e.SUCCESS, userInfo)
+	return
+
 }

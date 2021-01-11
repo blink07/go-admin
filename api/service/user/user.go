@@ -53,7 +53,6 @@ func (user *UserService) Login() (map[string]interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
-	// TODO RoleId 还未拿到
 	token, err := tokenNext(roleId, user.Username)
 	if err != nil {
 		return nil, err
@@ -79,4 +78,14 @@ func tokenNext(roleId int, username string) (string, error)  {
 		return "", err
 	}
 	return token, nil
+}
+
+
+func (user UserService)UserInfo() (*models.User, error){
+
+	userInfo, err := models.UserInfo(user.Id)
+	if err != nil {
+		return nil, err
+	}
+	return userInfo, nil
 }
