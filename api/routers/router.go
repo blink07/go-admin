@@ -40,6 +40,7 @@ func InitRouter() *gin.Engine {
 
 	// 用户模块
 	apiv1.GET("/user/:id", user.UserInfo)
+	apiv1.GET("/userList", user.UserList)
 
 	return r
 }

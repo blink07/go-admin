@@ -89,3 +89,12 @@ func (user UserService)UserInfo() (*models.User, error){
 	}
 	return userInfo, nil
 }
+
+
+func (user UserService)UserList() ([]*models.UserListForm, error){
+	userList,err := models.UserList(user.PageNum)
+	if err!=nil {
+		return nil, err
+	}
+	return userList, nil
+}

@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/pkg/errors"
 	"go-admin/api/middlewares/log"
+	"go-admin/conf/settings"
 )
 
 type User struct {
@@ -72,4 +73,24 @@ func UserInfo(id int) (*User, error) {
 	u.Role = r
 
 	return &u, nil
+}
+
+type UserListForm struct {
+	Username string
+	Email string
+	Mobile string
+	RoleId int
+	RoleName string
+}
+
+func UserList(pageNum int) ([]*UserListForm, error) {
+	//var user []*User
+	var userList []*UserListForm
+	err := db.Table("admin_user").Select("admin_user.username, admin_user.email, admin_user.mobile, admin_user.role_id, admin_role.role_name").Joins("left join admin_role on admin_user.role_id=admin_role.id").Offset(pageNum).Limit(settings.AppSetting.PageSize).Scan(&userList).Error
+
+	if err!=nil{
+		return nil, err
+	}
+
+	return userList, nil
 }

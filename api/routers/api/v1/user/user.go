@@ -88,7 +88,7 @@ func Login(c *gin.Context)  {
 
 func UserInfo(c *gin.Context) {
 	appG := app.Gin{c}
-
+	// 获取URL内的参数
 	id := com.StrTo(c.Param("id")).MustInt()
 
 	valid := validation.Validation{}
@@ -109,5 +109,26 @@ func UserInfo(c *gin.Context) {
 
 	appG.Response(http.StatusOK, e.SUCCESS, userInfo)
 	return
+
+}
+
+// 用户列表
+func UserList(c *gin.Context) {
+
+	appG := app.Gin{c}
+
+	pageNum := com.StrTo(c.DefaultQuery("pageNum","1")).MustInt()
+
+	userServicee := user.UserService{PageNum: pageNum}
+
+	userList, err := userServicee.UserList()
+	if err!= nil {
+		appG.Response(http.StatusOK, e.ERROR, err.Error())
+		return
+	}
+
+	appG.Response(http.StatusOK, e.SUCCESS, userList)
+	return
+
 
 }
