@@ -20,6 +20,11 @@ type UserForm struct {
 	RoleId int `json:"role_id"`
 }
 
+// @Summary 用户注册
+// @Produce json
+// @Param username query string true "username"
+// @Success 200 {string} json "{"code":200,"data":{},"message":"OK"}"
+// @Router /api/v1/register [post]
 func Register(c *gin.Context) {
 	appG := app.Gin{c}
 	var userForm UserForm
@@ -59,7 +64,14 @@ func Register(c *gin.Context) {
 	return
 }
 
-// 用户登录
+// @Summary User login
+// @Accept  json
+// @Produce  json
+// @Param username body string true "Username"
+// @Param password body string true "Password"
+// @Success 200 {object} app.Response
+// @Failure 500 {object} app.Response
+// @Router /api/v1/user/login [post]
 func Login(c *gin.Context)  {
 	appG := app.Gin{c}
 	var userForm UserForm
@@ -86,6 +98,11 @@ func Login(c *gin.Context)  {
 	appG.Response(http.StatusOK, e.SUCCESS, data)
 }
 
+//CreatScene createScene
+// @Summary User Info
+// @Produce  Json
+// @Param id path int true "ID"
+// @Router /api/v1/user/{id} [get]
 func UserInfo(c *gin.Context) {
 	appG := app.Gin{c}
 	// 获取URL内的参数
@@ -117,7 +134,7 @@ func UserList(c *gin.Context) {
 
 	appG := app.Gin{c}
 
-	pageNum := com.StrTo(c.DefaultQuery("pageNum","1")).MustInt()
+	pageNum := com.StrTo(c.DefaultQuery("pageNum","0")).MustInt()
 
 	userServicee := user.UserService{PageNum: pageNum}
 

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"go-admin/api/myredis"
 	"go-admin/api/routers"
 	"net/http"
 	//"github.com/gin-gonic/gin"
@@ -15,6 +16,7 @@ import (
 func main() {
 	settings.Setup()
 	models.SetUp()
+	myredis.Setup()
 
 	//r := gin.Default()
 	//r.Use(log.Logger())
@@ -42,7 +44,9 @@ func main() {
 	//	logger.Printf("Server err: %v", err)
 	//}
 	gin.SetMode(settings.ServerSetting.RunMode)
+
 	routersInit := routers.InitRouter()
+
 	readTimeout := settings.ServerSetting.ReadTimeout
 	writeTimeout := settings.ServerSetting.WriteTimeout
 	endPort := fmt.Sprintf(":%d", settings.ServerSetting.HttpPort)

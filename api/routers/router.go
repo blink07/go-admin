@@ -2,10 +2,15 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 	"go-admin/api/middlewares/JWT"
 	"go-admin/api/middlewares/log"
 	"go-admin/api/routers/api/v1/role"
 	"go-admin/api/routers/api/v1/user"
+	_ "net/http"
+	_ "go-admin/cmd/docs"  //没有用到也要注册进来，不然读不到swagger文件
+
 )
 //var logru = logrus.New()
 
@@ -18,6 +23,9 @@ func InitRouter() *gin.Engine {
 	//看官方注释文档 ,Recovery 中间件会恢复(recovers) 任何恐慌(panics) 如果存在恐慌，中间件将会写入500。这个中间件还是很必要的，因为当你程序里有些异常情况你没考虑到的时候，程序就退出了，服务就停止了，所以是必要的。
 	// 总的来说，程序崩溃时，还是会返回500
 	r.Use(gin.Recovery())
+
+	// 加载SWagger
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	apiv1 := r.Group("/api/v1")
 
