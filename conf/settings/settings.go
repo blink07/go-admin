@@ -46,6 +46,16 @@ type Redis struct {
 
 var RedisSettings = &Redis{}
 
+type FilePath struct {
+	BasePath string
+	ImagePath string
+	PrefixPath string
+	ImageMaxSize int
+	ImageAllowExts []string
+}
+
+var FileSettings = &FilePath{}
+
 // 读取配置文件
 func Setup() {
 	Cfg,err := ini.Load("conf/config.ini")
@@ -78,4 +88,10 @@ func Setup() {
 		log.Fatalf("Cfg.MapTo RedisSettings err:%v", err)
 	}
 
+	// 加载文件配置
+	err = Cfg.Section("files").MapTo(FileSettings)
+	if err != nil {
+		log.Fatalf("Cfg.MapTo FileSettins err:%v", err)
+	}
+	FileSettings.ImageMaxSize = FileSettings.ImageMaxSize * 1024 * 1024
 }

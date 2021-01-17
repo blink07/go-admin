@@ -6,8 +6,11 @@ import (
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 	"go-admin/api/middlewares/JWT"
 	"go-admin/api/middlewares/log"
+	v1 "go-admin/api/routers/api/v1"
 	"go-admin/api/routers/api/v1/role"
 	"go-admin/api/routers/api/v1/user"
+	"go-admin/api/service"
+	"net/http"
 	_ "net/http"
 	_ "go-admin/cmd/docs"  //没有用到也要注册进来，不然读不到swagger文件
 
@@ -24,9 +27,12 @@ func InitRouter() *gin.Engine {
 	// 总的来说，程序崩溃时，还是会返回500
 	r.Use(gin.Recovery())
 
+	// 访问项目中的静态文件
+	r.StaticFS("/upload/files/images", http.Dir(service.GetImagePath()))
+
 	// 加载SWagger
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-
+	r.POST("/upload", v1.ImageUpload)
 	apiv1 := r.Group("/api/v1")
 
 	// 用户模块注册和登录，不认证
