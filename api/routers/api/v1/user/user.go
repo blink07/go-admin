@@ -129,6 +129,4 @@ func UserList(c *gin.Context) {
 
 	appG.Response(http.StatusOK, e.SUCCESS, userList)
 	return
-
-
 }
