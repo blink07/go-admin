@@ -21,7 +21,6 @@ type UserForm struct {
 }
 
 // @Summary 用户注册
-// @Produce json
 // @Param username query string true "username"
 // @Success 200 {string} json "{"code":200,"data":{},"message":"OK"}"
 // @Router /api/v1/register [post]
@@ -66,11 +65,10 @@ func Register(c *gin.Context) {
 
 // @Summary User login
 // @Accept  json
-// @Produce  json
 // @Param username body string true "Username"
 // @Param password body string true "Password"
-// @Success 200 {object} app.Response
-// @Failure 500 {object} app.Response
+// @Success 200 {string} json "{"code":200,"data":{},"message":"OK"}"
+// @Failure 500 {string} string    "ok"
 // @Router /api/v1/user/login [post]
 func Login(c *gin.Context)  {
 	appG := app.Gin{c}
@@ -100,7 +98,6 @@ func Login(c *gin.Context)  {
 
 //CreatScene createScene
 // @Summary User Info
-// @Produce  Json
 // @Param id path int true "ID"
 // @Router /api/v1/user/{id} [get]
 func UserInfo(c *gin.Context) {

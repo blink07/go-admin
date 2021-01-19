@@ -2,18 +2,17 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"github.com/swaggo/gin-swagger/swaggerFiles"
 	"go-admin/api/middlewares/JWT"
 	"go-admin/api/middlewares/log"
 	v1 "go-admin/api/routers/api/v1"
 	"go-admin/api/routers/api/v1/role"
 	"go-admin/api/routers/api/v1/user"
 	"go-admin/api/service"
+	_ "go-admin/docs" //没有用到也要注册进来，不然读不到swagger文件
 	"net/http"
 	_ "net/http"
-	_ "go-admin/cmd/docs"  //没有用到也要注册进来，不然读不到swagger文件
-
 )
 //var logru = logrus.New()
 
@@ -31,7 +30,8 @@ func InitRouter() *gin.Engine {
 	r.StaticFS("/upload/files/images", http.Dir(service.GetImagePath()))
 
 	// 加载SWagger
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	url := ginSwagger.URL("http://localhost:8081/swagger/doc.json")
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 	r.POST("/upload", v1.ImageUpload)
 	apiv1 := r.Group("/api/v1")
 
