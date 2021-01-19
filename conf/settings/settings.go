@@ -36,6 +36,26 @@ type Database struct {
 
 var DataBaseSettings = &Database{}
 
+type Redis struct {
+	Host string
+	Password string
+	MaxIdle int
+	MaxActive int
+	IdleTimeout time.Duration
+}
+
+var RedisSettings = &Redis{}
+
+type FilePath struct {
+	BasePath string
+	ImagePath string
+	PrefixPath string
+	ImageMaxSize int
+	ImageAllowExts []string
+}
+
+var FileSettings = &FilePath{}
+
 // 读取配置文件
 func Setup() {
 	Cfg,err := ini.Load("conf/config.ini")
@@ -60,4 +80,18 @@ func Setup() {
 		log.Fatalf("Cfg.MapTo DatabaseSetting err:%v", err)
 	}
 	log.Println(DataBaseSettings)
+
+	// 加载redis配置
+	err = Cfg.Section("redis").MapTo(RedisSettings)
+	RedisSettings.IdleTimeout =RedisSettings.IdleTimeout*time.Second
+	if err != nil {
+		log.Fatalf("Cfg.MapTo RedisSettings err:%v", err)
+	}
+
+	// 加载文件配置
+	err = Cfg.Section("files").MapTo(FileSettings)
+	if err != nil {
+		log.Fatalf("Cfg.MapTo FileSettins err:%v", err)
+	}
+	FileSettings.ImageMaxSize = FileSettings.ImageMaxSize * 1024 * 1024
 }
