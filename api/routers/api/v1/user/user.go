@@ -67,7 +67,7 @@ func Register(c *gin.Context) {
 // @Accept  json
 // @Param username body string true "Username"
 // @Param password body string true "Password"
-// @Success 200 {string} json "{"code":200,"data":{},"message":"OK"}"
+// @Success 200 {object} json app.Response
 // @Failure 500 {string} string    "ok"
 // @Router /api/v1/user/login [post]
 func Login(c *gin.Context)  {
