@@ -38,3 +38,29 @@ func RoleInfo(id int) (*Role, error) {
 	}
 	return &role, nil
 }
+
+
+// 查询所有角色
+func RoleList() ([]*Role, error){
+	var roleList []*Role
+	err := db.Find(&roleList).Error
+	if err != nil {
+		return nil, err
+	}
+	return roleList, nil
+}
+
+
+// 硬删除角色
+func DeleteRole() bool {
+	println(111111)
+	var role Role
+	err := db.Unscoped().Where("deleted_on != ? ", 0).Delete(&role).Error
+	if err!=nil {
+		println("AAAAAAAAAA"+err.Error())
+		return false
+	}
+	println(22222)
+	return true
+}
+

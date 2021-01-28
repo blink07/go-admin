@@ -21,6 +21,7 @@ type Server struct {
 	LogFile string
 
 	SigningKey string
+	ExcelDir string
 }
 
 var ServerSetting = &Server{}

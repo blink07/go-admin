@@ -3,6 +3,7 @@ package user
 import (
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 	"github.com/unknwon/com"
 	"go-admin/api/service/user"
 	"go-admin/api/utils/app"
@@ -62,6 +63,7 @@ func Register(c *gin.Context) {
 	appG.Response(http.StatusOK, e.SUCCESS, "注册成功~")
 	return
 }
+
 
 // @Summary User login
 // @Accept  json
@@ -143,4 +145,27 @@ func UserList(c *gin.Context) {
 
 	appG.Response(http.StatusOK, e.SUCCESS, userList)
 	return
+}
+
+type RegisterForm struct {
+	Mobile   string   `json:"mobile" binding:"required"`
+	Password string `json:"password" binding:"required,gte=6" message:"aaaaa"`
+
+	Userform UserForm `json:"userform"`
+}
+
+func AccountRes(c *gin.Context)  {
+	appG := app.Gin{c}
+	var reg RegisterForm
+	// 校验json
+	err := c.ShouldBindWith(&reg, binding.JSON)
+
+	if err !=nil {
+		appG.Response(http.StatusOK, e.ERROR, err.Error())
+		return
+	}
+	println(reg.Userform.Username)
+	appG.Response(http.StatusOK, e.SUCCESS, nil)
+	return
+
 }

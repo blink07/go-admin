@@ -19,7 +19,7 @@ func SetUp()  {
 
 	db, err = gorm.Open(settings.DataBaseSettings.Type, fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
 		settings.DataBaseSettings.User, settings.DataBaseSettings.Password, settings.DataBaseSettings.Host, settings.DataBaseSettings.Name))
-
+	db = db.Debug()
 	if err!= nil{
 		log.Fatalf("model.Setup err:%v", err)
 	}

@@ -27,7 +27,8 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Recovery())
 
 	// 访问项目中的静态文件
-	r.StaticFS("/upload/files/images", http.Dir(service.GetImagePath()))
+	r.StaticFS("/upload/files/images", http.Dir(service.GetImagePath()))  // 图片
+	r.StaticFS("/upload/files/excel", http.Dir(service.GetExcelPath()))  // excel
 
 	// 加载SWagger
 	url := ginSwagger.URL("http://localhost:8081/swagger/doc.json")
@@ -51,10 +52,15 @@ func InitRouter() *gin.Engine {
 	// 角色模块
 	apiv1.POST("/role", role.AddRole)
 	apiv1.GET("/role/:id", role.RoleInfo)
+	apiv1.GET("/role_export", role.ExportRoleExcel)
+	apiv1.GET("/role_import", role.ImportExcelRole)
 
 	// 用户模块
 	apiv1.GET("/user/:id", user.UserInfo)
 	apiv1.GET("/userList", user.UserList)
+
+	// 测试模块
+	apiv1.GET("/test/valid", user.AccountRes)
 
 	return r
 }
