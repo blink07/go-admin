@@ -42,7 +42,6 @@ func InitRouter() *gin.Engine {
 
 	// 定义认证中间件
 	apiv1.Use(JWT.JWTAuth())
-	println("AAAAAAAAAAAAAAAA")
 	apiv1.GET("/ping", func(context *gin.Context) {
 		log.Info("BBBBBBBBBBBBBBB")
 		context.JSON(200, gin.H{
